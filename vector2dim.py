@@ -12,7 +12,6 @@ class Vector:
     def __repr__(self) -> str:
         return f"({self.x}, {self.y})"
 
-
 class Vector2Dim(Vector):
 
     def __init__(self, x: float, y: float) -> None:
