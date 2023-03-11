@@ -123,6 +123,14 @@ class Vector2Dim(Vector):
         """
         
         self.x, self.y = x, y
+    
+    def from_list(self, array: Union[list[float], tuple[float, float]]) -> Vector:
+        
+        """
+        create Vector2Dim from array or tuple 
+        """
+
+        return Vector2Dim(array[0], array[1])
 
     def mult(self, other: Union[numbers.Real, Vector]) -> Vector:
 
