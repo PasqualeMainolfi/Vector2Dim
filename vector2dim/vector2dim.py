@@ -1,10 +1,13 @@
 import math
 import numbers
 import random
-from typing import Union
+from typing import Union, Type
+
 
 class Vector:
-    def __init__(self, x: float, y: float) -> None:
+
+    def __init__(self, x: Union[int, float], y: Union[int, float]) -> None:
+
         self.x = x
         self.y = y
         self._real_numbers = numbers.Real
@@ -14,7 +17,7 @@ class Vector:
 
 class Vector2Dim(Vector):
 
-    def __init__(self, x: float, y: float) -> None:
+    def __init__(self, x: Union[int, float], y: Union[int, float]) -> None:
         super().__init__(x, y)
 
     def __radd__(self, other: Union[numbers.Real, Vector]) -> Vector:
@@ -116,6 +119,24 @@ class Vector2Dim(Vector):
     def __abs__(self) -> float:
         return self.mag()
     
+    def __eq__(self, other: Vector) -> bool:
+        return (self.x == other.x and self.y == other.y)
+    
+    def __ne__(self, other: Vector) -> bool:
+        return (self.x != other.x or self.y != other.y)
+    
+    def __lt__(self, other: Vector) -> bool:
+        return self.mag() < other.mag()
+    
+    def __le__(self, other: Vector) -> bool:
+        return self.mag() <= other.mag()
+    
+    def __gt__(self, other: Vector) -> bool:
+        return self.mag() > other.mag()
+    
+    def __ge__(self, other: Vector) -> bool:
+        return self.mag() >= other.mag()
+    
     def set_values(self, x: float, y: float) -> None:
         
         """
@@ -123,6 +144,22 @@ class Vector2Dim(Vector):
         """
         
         self.x, self.y = x, y
+    
+    def set_x(self, value: Union[int, float]) -> None:
+
+        """
+        set x value
+        """
+        
+        self.x = value
+    
+    def set_y(self, value: Union[int, float]) -> None:
+        
+        """
+        set y value
+        """
+        
+        self.y = value
     
     def from_list(self, array: Union[list[float], tuple[float, float]]) -> Vector:
         
@@ -146,7 +183,7 @@ class Vector2Dim(Vector):
             self.y *= other.y
         return self
     
-    def dot(self, other) -> float:
+    def dot(self, other: Vector) -> float:
         
         """
         dot product
@@ -349,7 +386,7 @@ class Vector2Dim(Vector):
     def get_coord(self) -> tuple[float, float]:
 
         """
-        get x and y
+        get x and y as a tuple
         """
         
         return (self.x, self.y)
